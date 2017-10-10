@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Task } from './shared/task.model';
+import { TaskService } from './shared/task.service';
 
-const TASKS: Array<Task> = [
-	{id: 1, title: 'Fazer tarefa 1'},
-	{id: 2, title: 'Fazer tarefa 2'},
-	{id: 3, title: 'Fazer tarefa 3'},
-	{id: 4, title: 'Fazer tarefa 4'},
-	{id: 5, title: 'Fazer tarefa 5'},
-	{id: 6, title: 'Fazer tarefa 6'}
-	];
 
 @Component({
 	selector: 'tasks',
@@ -17,16 +10,19 @@ const TASKS: Array<Task> = [
 })
 
 export class TasksComponent implements OnInit {
-	public tasks;
-	public nome;
+	public tasks: Array<Task>;
+	public selectedTask: Task;
 
 	public constructor(){
 	}
 
 
 	public ngOnInit(){
-		this.tasks = TASKS;
-		this.nome = 'Rafael';
+		this.tasks = TaskService.TASKS;
+	}
+
+	public onSelect(task: Task): void {
+		this.selectedTask = task;
 	}
 }
 
