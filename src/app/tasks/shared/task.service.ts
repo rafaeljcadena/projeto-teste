@@ -15,9 +15,11 @@ const TASKS: Array<Task> = [
 @Injectable()
 
 export class TaskService{
+
+
+
+
 	public getTasks(): Array<Task>{
 		return TASKS;
 	}
-
-	
 }
