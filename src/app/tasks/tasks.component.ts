@@ -6,29 +6,28 @@ import { TaskService } from './shared/task.service';
 
 @Component({
 	selector: 'tasks',
-	templateUrl: './tasks.component.html',
-	providers: [ TaskService ]
+	templateUrl: './tasks.component.html'
 })
 
 export class TasksComponent implements OnInit {
 	public tasks: Array<Task>;
 	public selectedTask: Task;
-	// private taskService: TaskService;
+	private taskService: TaskService;
 
-	public constructor(private taskService: TaskService){
-		// this.taskService = taskService;
+	public constructor(taskService: TaskService){
+		
 	}
 
+
 	public ngOnInit(){
-		this.taskService.getTasks()
-				.then((tasks) => this.tasks = tasks)
-				.catch(function(error_msg){
-					console.log("Erro");
-					console.log(error_msg);
-				})
+		this.taskService = new TaskService();
+		this.taskService.getTasks().then(tasks => this.tasks = tasks);
 	}
 
 	public onSelect(task: Task): void {
 		this.selectedTask = task;
 	}
 }
+
+
+

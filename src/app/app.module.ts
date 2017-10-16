@@ -1,17 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component'
-import { TasksComponent } from './tasks/tasks.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-details.component';
 import { LearningBindingsComponent } from './learning-bindings/learning-bindings.component';
+import { TaskService } from './tasks/shared/task.service';
 
+
+const ROUTES = RouterModule.forRoot([
+    {
+      path: 'tasks',
+      component: TasksComponent
+    },
+    {
+      path: 'dashboard',
+      component: DashboardComponent
+    },
+    {
+      path: '',
+      redirectTo: '/dashboard',
+      pathMatch: 'full'
+    }
+  ])
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
     NavbarComponent,
     TasksComponent, 
     LearningBindingsComponent,
@@ -19,9 +39,12 @@ import { LearningBindingsComponent } from './learning-bindings/learning-bindings
   ],
   imports: [
     BrowserModule, 
-    FormsModule
+    FormsModule,
+    ROUTES
   ],
-  providers: [],
+  providers: [ 
+    TaskService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
