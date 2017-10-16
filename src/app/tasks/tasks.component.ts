@@ -7,30 +7,28 @@ import { TaskService } from './shared/task.service';
 @Component({
 	selector: 'tasks',
 	templateUrl: './tasks.component.html',
-	providers: [
-		{ provide: TaskService, useClass: TaskService }
-	]
+	providers: [ TaskService ]
 })
 
 export class TasksComponent implements OnInit {
 	public tasks: Array<Task>;
 	public selectedTask: Task;
-	private taskService: TaskService;
+	// private taskService: TaskService;
 
-	public constructor(taskService: TaskService){
-		this.taskService = taskService;
+	public constructor(private taskService: TaskService){
+		// this.taskService = taskService;
 	}
 
-
 	public ngOnInit(){
-		// let service = new TaskService();
-		// this.tasks = service.getTasks();
+		this.taskService.getTasks()
+				.then((tasks) => this.tasks = tasks)
+				.catch(function(error_msg){
+					console.log("Erro");
+					console.log(error_msg);
+				})
 	}
 
 	public onSelect(task: Task): void {
 		this.selectedTask = task;
 	}
 }
-
-
-
