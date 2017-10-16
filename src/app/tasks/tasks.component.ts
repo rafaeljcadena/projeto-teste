@@ -6,10 +6,7 @@ import { TaskService } from './shared/task.service';
 
 @Component({
 	selector: 'tasks',
-	templateUrl: './tasks.component.html',
-	providers: [
-		{ provide: TaskService, useClass: TaskService }
-	]
+	templateUrl: './tasks.component.html'
 })
 
 export class TasksComponent implements OnInit {
@@ -18,13 +15,12 @@ export class TasksComponent implements OnInit {
 	private taskService: TaskService;
 
 	public constructor(taskService: TaskService){
-		this.taskService = taskService;
+		
 	}
 
 
 	public ngOnInit(){
-		// let service = new TaskService();
-		// this.tasks = service.getTasks();
+		this.taskService.getTasks().then(tasks => this.tasks = tasks);
 	}
 
 	public onSelect(task: Task): void {
