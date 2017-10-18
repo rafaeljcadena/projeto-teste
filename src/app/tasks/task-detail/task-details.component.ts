@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core'
+//import { Component, Input, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 
 import "rxjs/add/operator/switchMap";
 
@@ -14,13 +16,13 @@ import { TaskService } from '../shared/task.service';
 	templateUrl: 'task-details.component.html'
 })
 
-export class TaskDetailComponent{
-	@Input() task: Task;
-	// public task: Task;
+export class TaskDetailComponent implements OnInit{
+	public task: Task;
 
 	public constructor(
 		private taskService: TaskService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private location: Location
 		){	}
 
 	public ngOnInit(){
@@ -29,5 +31,9 @@ export class TaskDetailComponent{
 				return this.taskService.getTask(+params['id']);
 			})
 			.subscribe(task => this.task = task)
+	}
+
+	public goBack(){
+		this.location.back();
 	}
 }

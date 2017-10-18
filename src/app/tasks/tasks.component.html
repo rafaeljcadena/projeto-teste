@@ -1,9 +1,12 @@
+<h1 class="page-header">Lista de Tarefas</h1>
 <table class="table">
 	<thead>
-		<th>ID</th>
-		<th>Título</th>
-		<th>Usuário</th>
-		<th>Ações</th>
+		<tr>
+			<th>ID</th>
+			<th>Título</th>
+			<th>Usuário</th>
+			<th>Ações</th>
+		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let task of tasks">
@@ -11,9 +14,9 @@
 			<td>{{task.title}}</td>
 			<td></td>
 			<td>
-				<button class="btn btn-info" data-toggle="modal" data-target="#taskDetail" (click)="onSelect(task)" >
+				<a class="btn btn-info" [routerLink]="['/tasks', task.id]">
 					<span class="glyphicon glyphicon-info-sign"></span>
-				</button>
+				</a>
 				<button class="btn btn-warning">
 					<span class="glyphicon glyphicon-wrench"></span>
 				</button>
@@ -24,5 +27,3 @@
 		</tr>
 	</tbody>
 </table>
-
-<task-detail [task]="selectedTask"></task-detail>

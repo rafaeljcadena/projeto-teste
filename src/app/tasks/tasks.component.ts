@@ -12,15 +12,15 @@ import { TaskService } from './shared/task.service';
 export class TasksComponent implements OnInit {
 	public tasks: Array<Task>;
 	public selectedTask: Task;
-	private taskService: TaskService;
+	//private taskService: TaskService;
 
-	public constructor(taskService: TaskService){
+	public constructor(public taskService: TaskService){
 		
 	}
 
 
 	public ngOnInit(){
-		this.taskService = new TaskService();
+		//this.taskService = new TaskService();
 		this.taskService.getTasks().then(tasks => this.tasks = tasks);
 	}
 
