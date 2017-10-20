@@ -1,36 +1,22 @@
+// Angular Imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
 
+// Component Imports
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-details.component';
 import { LearningBindingsComponent } from './learning-bindings/learning-bindings.component';
+
+// Services Imports
 import { TaskService } from './tasks/shared/task.service';
 
-
-const ROUTES = RouterModule.forRoot([
-    {
-      path: 'tasks/:id',
-      component: TaskDetailComponent
-    },
-    {
-      path: 'tasks',
-      component: TasksComponent
-    },
-    {
-      path: 'dashboard',
-      component: DashboardComponent
-    },
-    {
-      path: '',
-      redirectTo: '/dashboard',
-      pathMatch: 'full'
-    }
-  ])
+// Modules Imports
+import { AppRoutingModule } from "./app-routing.module"
 
 @NgModule({
   declarations: [
@@ -44,7 +30,8 @@ const ROUTES = RouterModule.forRoot([
   imports: [
     BrowserModule, 
     FormsModule,
-    ROUTES
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [ 
     TaskService
