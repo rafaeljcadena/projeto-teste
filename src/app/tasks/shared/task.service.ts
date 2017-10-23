@@ -1,3 +1,5 @@
+import { Http } from '@angular/http';
+
 import { Injectable } from '@angular/core';
 
 import { Task } from './task.model';
@@ -16,11 +18,14 @@ const TASKS: Array<Task> = [
 
 export class TaskService{
 
-
-
+	public constructor(private http: Http){
+	}
 
 	public getTasks(): Promise<Task[]>{
-		let promise = new Promise((resolve, reject) => {
+		this.http.get('api/tasks');
+
+
+		let promise = new Promise<Task[]>((resolve, reject) => {
 			if (TASKS.length > 0) {
 				resolve(TASKS);
 			} else {
